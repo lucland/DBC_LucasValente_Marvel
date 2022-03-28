@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dbc_lucas_valente/bloc/character_cubit.dart';
 import 'package:dbc_lucas_valente/bloc/character_state.dart';
 import 'package:dbc_lucas_valente/model/character.dart';
@@ -30,7 +28,6 @@ class _DetailScreenState extends State<DetailScreen> {
     _charactersCubit.stream.listen((state) {
       if (state is CharacterStateLoaded) {
         _character = state.character;
-        log(_character!.name.toString());
       }
     });
   }
@@ -102,7 +99,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              _character?.name ?? "",
+                              _character?.name ?? widget.characterName!,
                               style: const TextStyle(
                                   fontSize: 20,
                                   wordSpacing: 0.5,
@@ -114,7 +111,10 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(_character?.description ?? "",
+                            child: Text(
+                                _character?.description != ""
+                                    ? _character!.description!
+                                    : "No description informed",
                                 style: const TextStyle(
                                     fontSize: 15,
                                     color: CustomColor.white,
@@ -140,35 +140,40 @@ class _DetailScreenState extends State<DetailScreen> {
                             shrinkWrap: true,
                             itemCount: _character?.comics?.items?.length ?? 0,
                             itemBuilder: (context, index) {
-                              return ListTile(
-                                visualDensity: VisualDensity(horizontal: 0),
-                                title: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(2),
-                                    color: CustomColor.primary,
-                                    border: Border.all(
-                                      color: CustomColor.red,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      _character?.comics?.items
-                                              ?.elementAt(index)
-                                              ?.name ??
-                                          "",
-                                      style: const TextStyle(
-                                          fontSize: 15,
-                                          color: CustomColor.white,
-                                          overflow: TextOverflow.ellipsis,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Balsamiq'),
-                                    ),
-                                  ),
-                                ),
-                              );
+                              return _character?.comics?.items?.isNotEmpty ==
+                                      true
+                                  ? ListTile(
+                                      visualDensity:
+                                          const VisualDensity(horizontal: 0),
+                                      title: Container(
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: CustomColor.primary,
+                                          border: Border.all(
+                                            color: CustomColor.red,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            _character?.comics?.items
+                                                    ?.elementAt(index)
+                                                    ?.name ??
+                                                "",
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                color: CustomColor.white,
+                                                overflow: TextOverflow.ellipsis,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Balsamiq'),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : const Text("No comics found");
                             },
                           ),
                           const Padding(
