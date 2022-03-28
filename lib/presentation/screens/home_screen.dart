@@ -32,11 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
 
-    print('initState');
     _charactersCubit.stream.listen((event) {
       if (event is CharacterListLoaded) {
         _characters.addAll(event.characters!);
-        print(_characters[0].name);
       }
     });
   }
@@ -94,6 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   return Container();
                 },
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                '© 2022 Lucas Valente for DBC Company',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
