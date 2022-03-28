@@ -51,14 +51,20 @@ class _DetailScreenState extends State<DetailScreen> {
               height: 35,
               fit: BoxFit.contain,
             ),
-            Text(
-                widget.characterName != null ? "| ${widget.characterName}" : "",
-                style: const TextStyle(
-                    fontSize: 20,
-                    wordSpacing: 0.5,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Balsamiq',
-                    color: Colors.white)),
+            Flexible(
+              flex: 1,
+              child: Text(
+                  widget.characterName != null
+                      ? "| ${widget.characterName}"
+                      : "",
+                  style: const TextStyle(
+                      fontSize: 20,
+                      overflow: TextOverflow.ellipsis,
+                      wordSpacing: 0.5,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Balsamiq',
+                      color: Colors.white)),
+            ),
           ],
         ),
       ),
@@ -93,6 +99,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               style: const TextStyle(
                                   fontSize: 20,
                                   wordSpacing: 0.5,
+                                  overflow: TextOverflow.ellipsis,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Balsamiq',
                                   color: Colors.white),
