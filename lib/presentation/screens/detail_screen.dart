@@ -63,7 +63,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       wordSpacing: 0.5,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Balsamiq',
-                      color: Colors.white)),
+                      color: CustomColor.white)),
             ),
           ],
         ),
@@ -92,6 +92,13 @@ class _DetailScreenState extends State<DetailScreen> {
                             height: MediaQuery.of(context).size.height * 0.5,
                             fit: BoxFit.cover,
                           ),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Divider(
+                              color: CustomColor.red,
+                              thickness: 2,
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
@@ -102,7 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   overflow: TextOverflow.ellipsis,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Balsamiq',
-                                  color: Colors.white),
+                                  color: CustomColor.white),
                             ),
                           ),
                           Padding(
@@ -110,14 +117,21 @@ class _DetailScreenState extends State<DetailScreen> {
                             child: Text(_character?.description ?? "",
                                 style: const TextStyle(
                                     fontSize: 15,
-                                    color: Colors.white,
+                                    color: CustomColor.white,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Balsamiq')),
                           ),
-                          const Text("Comics",
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Divider(
+                              color: CustomColor.red,
+                              thickness: 2,
+                            ),
+                          ),
+                          const Text("APPEARED IN COMICS:",
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.white,
+                                  color: CustomColor.white,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Balsamiq')),
                           const SizedBox(height: 10),
@@ -163,7 +177,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               '© 2022 Lucas Valente for DBC Company',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.white,
+                                color: CustomColor.white,
                               ),
                             ),
                           ),

@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     wordSpacing: 0.5,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Balsamiq',
-                    color: Colors.white)),
+                    color: CustomColor.white)),
           ],
         ),
       ),
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 '© 2022 Lucas Valente for DBC Company',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white,
+                  color: CustomColor.white,
                 ),
               ),
             ),
