@@ -1,4 +1,4 @@
-# dbc_lucas_valente
+# MARVEL APP FROM LUCAS VALENTE TO DBC COMPANY
 
 App Marvel para a DBC. Consumindo a Marvel API.
 Para rodar o projeto, baixe o repositório na sua máquina e execute o comando "flutter pub get".
