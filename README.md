@@ -1,16 +1,9 @@
 # dbc_lucas_valente
 
-App Marvel para a DBC.
+App Marvel para a DBC. Consumindo a Marvel API.
+Para rodar o projeto, baixe o repositório na sua máquina e execute o comando "flutter pub get".
+Gerencia de estado utilizada: Bloc (Cubit)
+Modelo: MVC
 
-## Getting Started
+![Simulator Screen Shot - iPhone 12 - 2022-03-27 at 23 24 42](https://user-images.githubusercontent.com/17681714/160316022-4b2beb99-45f0-4788-b5b9-8697f1f9268c.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
