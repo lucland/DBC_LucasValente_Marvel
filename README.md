@@ -9,6 +9,6 @@ MAIN SCREEN:
 ![Simulator Screen Shot - iPhone 12 - 2022-03-28 at 08 54 18](https://user-images.githubusercontent.com/17681714/160394017-7493ef70-adda-4500-b142-f4a78098bdeb.png)
 
 DETAIL SCREEN:
-![Simulator Screen Shot - iPhone 12 - 2022-03-28 at 08 54 24](https://user-images.githubusercontent.com/17681714/160394062-085d06ba-84a5-419f-a777-1312e74e18d9.png)
+![Simulator Screen Shot - iPhone 12 - 2022-03-28 at 09 13 46](https://user-images.githubusercontent.com/17681714/160395573-5d976639-31ed-42c2-9f52-dd472cea87aa.png)
 
 
