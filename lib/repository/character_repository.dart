@@ -10,7 +10,10 @@ class CharacterRepository {
     final response =
         await dioConnection.get(urlEndpoints.generateUrl("characters", id: id));
     var data = new Map<String, dynamic>.from(response.data);
-    return Character.fromJson(data);
+    List<Character> character = data["data"]["results"]
+        .map<Character>((json) => Character.fromJson(json))
+        .toList();
+    return character[0];
   }
 
   Future<List<Character>> getCharacters({int offset = 0}) async {

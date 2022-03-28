@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dbc_lucas_valente/bloc/character_state.dart';
 import 'package:dbc_lucas_valente/model/character.dart';
 import 'package:dbc_lucas_valente/repository/character_repository.dart';
@@ -17,7 +19,7 @@ class CharactersCubit extends Cubit<CharactersState> {
           await characterRepository.getCharacters(offset: offset);
       emit(CharacterListLoaded(characters: characters));
     } catch (e) {
-      print(e);
+      log(e.toString());
       emit(CharacterStateError(message: e.toString()));
     }
   }
@@ -28,6 +30,7 @@ class CharactersCubit extends Cubit<CharactersState> {
       Character character = await characterRepository.getCharacter(id);
       emit(CharacterStateLoaded(character: character));
     } catch (e) {
+      log(e.toString());
       emit(CharacterStateError(message: e.toString()));
     }
   }

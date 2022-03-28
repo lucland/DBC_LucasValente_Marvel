@@ -26,7 +26,8 @@ class CharacterCard extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => DetailScreen(
-                    character: character,
+                    characterId: character!.id.toString(),
+                    characterName: character!.name,
                   ),
                 ));
           },
