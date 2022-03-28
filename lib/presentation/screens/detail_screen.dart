@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dbc_lucas_valente/bloc/character_cubit.dart';
 import 'package:dbc_lucas_valente/bloc/character_state.dart';
 import 'package:dbc_lucas_valente/model/character.dart';
@@ -7,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailScreen extends StatefulWidget {
-  final Character? character;
-  const DetailScreen({Key? key, @required this.character}) : super(key: key);
+  final String? characterId;
+  final String? characterName;
+  const DetailScreen({Key? key, @required this.characterId, this.characterName})
+      : super(key: key);
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -21,11 +25,12 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-    _charactersCubit.getCharacter(widget.character!.id.toString());
+    _charactersCubit.getCharacter(widget.characterId.toString());
 
     _charactersCubit.stream.listen((state) {
       if (state is CharacterStateLoaded) {
         _character = state.character;
+        log(_character!.name.toString());
       }
     });
   }
@@ -46,7 +51,8 @@ class _DetailScreenState extends State<DetailScreen> {
               height: 35,
               fit: BoxFit.contain,
             ),
-            Text("| ${widget.character?.name}",
+            Text(
+                widget.characterName != null ? "| ${widget.characterName}" : "",
                 style: const TextStyle(
                     fontSize: 20,
                     wordSpacing: 0.5,
@@ -68,28 +74,94 @@ class _DetailScreenState extends State<DetailScreen> {
                     return const LoadingIndicator();
                   }
                   if (state is CharacterStateLoaded) {
-                    return Column(
-                      children: [
-                        Text(_character?.name ?? "",
-                            style: TextStyle(
-                                fontSize: 20,
+                    return SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            _character!.thumbnail!.path! +
+                                '.' +
+                                _character!.thumbnail!.extension!,
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.5,
+                            fit: BoxFit.cover,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              _character?.name ?? "",
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  wordSpacing: 0.5,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Balsamiq',
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(_character?.description ?? "",
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Balsamiq')),
+                          ),
+                          const Text("Comics",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Balsamiq')),
+                          const SizedBox(height: 10),
+                          ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _character?.comics?.items?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                visualDensity: VisualDensity(horizontal: 0),
+                                title: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(2),
+                                    color: CustomColor.primary,
+                                    border: Border.all(
+                                      color: CustomColor.red,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      _character?.comics?.items
+                                              ?.elementAt(index)
+                                              ?.name ??
+                                          "",
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          color: CustomColor.white,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Balsamiq'),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              '© 2022 Lucas Valente for DBC Company',
+                              style: TextStyle(
+                                fontSize: 12,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Balsamiq')),
-                        Text(_character?.description ?? "",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Balsamiq')),
-                        Text(_character?.modified ?? "",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Balsamiq')),
-                        Text(_character?.comics?.items?.first?.name ?? ""),
-                      ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   }
                   return Container();
